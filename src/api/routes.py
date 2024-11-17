@@ -27,7 +27,7 @@ def handle_hello():
 def create_user():
     body = request.get_json()
     user_email = body['email']
-    user_password = hashlib.sha256(body['password']).encode("utf-8")
+    user_password = hashlib.sha256(body['password'].encode("utf-8")).hexdigest()
     user = User(email = user_email, password = user_password)
     db.session.add(user)
     db.session.commit()
